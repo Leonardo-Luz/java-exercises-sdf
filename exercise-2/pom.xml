@@ -5,10 +5,10 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>ifrs.edu.com</groupId>
-  <artifactId>exercise_1</artifactId>
+  <artifactId>exercise-2</artifactId>
   <version>1.0-SNAPSHOT</version>
 
-  <name>exercise_1</name>
+  <name>exercise-2</name>
   <url>http://localhost:8080</url>
 
   <properties>

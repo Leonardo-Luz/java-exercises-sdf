@@ -10,7 +10,7 @@ public class Factory {
         Connection connection = null;
 
         // DEFAULT VALUES
-        String url = "jdbc:postgresql://localhost:5432/java_revision_exercise_1";
+        String url = "jdbc:postgresql://localhost:5432/java_revision_exercise_2";
         String password = "postgres";
         String username = "postgres";
 
