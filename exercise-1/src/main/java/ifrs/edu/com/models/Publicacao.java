@@ -18,4 +18,11 @@ public abstract class Publicacao {
     public String getTitulo() {
         return titulo;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof Publicacao
+                && ((Publicacao) obj).getTitulo().equals(this.getTitulo())
+                && ((Publicacao) obj).getData().equals(this.getData());
+    }
 }

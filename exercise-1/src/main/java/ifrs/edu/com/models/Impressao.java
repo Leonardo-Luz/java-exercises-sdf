@@ -10,7 +10,7 @@ public class Impressao {
 
     private static int qtyImpressa = 0;
 
-    Impressao(LocalDate data, Publicacao publicacao) {
+    Impressao(Publicacao publicacao) {
         this.data = LocalDate.now();
         this.publicacao = publicacao;
 
@@ -31,7 +31,7 @@ public class Impressao {
 
     @Override
     public boolean equals(Object obj) {
-        return super.equals(obj);
+        return obj instanceof Impressao && ((Impressao) obj).getCod() == this.getCod();
     }
 
     @Override

@@ -23,7 +23,10 @@ public class Revista extends Publicacao {
 
     @Override
     public boolean equals(Object obj) {
-        return super.equals(obj);
+        return super.equals(obj)
+                && obj instanceof Revista
+                && ((Revista) obj).getEditora().equals(this.getEditora())
+                && ((Revista) obj).getEdicao() == this.getEdicao();
     }
 
     @Override

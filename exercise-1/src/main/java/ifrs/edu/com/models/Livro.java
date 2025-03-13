@@ -23,7 +23,10 @@ public class Livro extends Publicacao {
 
     @Override
     public boolean equals(Object obj) {
-        return super.equals(obj);
+        return super.equals(obj)
+                && obj instanceof Livro
+                && ((Livro) obj).getPaginas() == this.getPaginas()
+                && ((Livro) obj).getAutores().equals(this.getAutores());
     }
 
     @Override
