@@ -12,7 +12,7 @@ public class ClienteTest {
     private Cliente cliente;
 
     @BeforeEach
-    public void setupClient() {
+    public void setupTest() {
         this.cliente = new Cliente();
     }
 

@@ -53,4 +53,16 @@ public class Conta {
 	public Cliente getTitular() {
 		return titular;
 	}
+
+	public int saca(int val) {
+		return 0;
+	}
+
+	public void deposita(double val) {
+
+	}
+
+	public void transfere(double val, Conta conta) {
+
+	}
 }
