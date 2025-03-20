@@ -22,19 +22,22 @@ public class Conta {
 		this.setLimite(limite);
 	}
 
-	public void setId(int id) {
+	private void setId(int id) {
 		this.id = id;
 	}
 
-	public void setSaldo(double saldo) {
+	private void setSaldo(double saldo) {
+		if (saldo < 0 && -saldo > this.limite) {
+			throw new ContaException("Saldo não pode ser menor que o limite!");
+		}
 		this.saldo = saldo;
 	}
 
-	public void setLimite(int limite) {
+	private void setLimite(int limite) {
 		this.limite = limite;
 	}
 
-	public void setTitular(Cliente titular) {
+	private void setTitular(Cliente titular) {
 		this.titular = titular;
 	}
 
@@ -54,15 +57,39 @@ public class Conta {
 		return titular;
 	}
 
-	public int saca(int val) {
-		return 0;
+	public double saca(double val) {
+		boolean valIsNegative = val < 0;
+
+		if (valIsNegative) {
+			throw new ContaException("Não pode sacar um valor negativo.");
+		}
+
+		this.setSaldo(this.saldo - val);
+
+		return val;
 	}
 
 	public void deposita(double val) {
+		boolean valIsNegative = val < 0;
 
+		if (valIsNegative) {
+			throw new ContaException("Não pode depositar um valor negativo.");
+		}
+
+		this.setSaldo(this.saldo + val);
 	}
 
 	public void transfere(double val, Conta conta) {
+		boolean valIsNegative = val < 0;
 
+		if (conta == null) {
+			throw new NullPointerException("Não pode transferir para uma conta nula.");
+		}
+
+		if (valIsNegative) {
+			throw new ContaException("Não pode transferir um valor negativo.");
+		}
+
+		conta.deposita(this.saca(val));
 	}
 }
