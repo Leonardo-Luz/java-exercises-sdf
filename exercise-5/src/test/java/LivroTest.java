@@ -29,24 +29,22 @@ public class LivroTest {
 		String titulo = "senhor dos aneis";
 		livroFalso.setTitulo(titulo);
 		System.out.println("chamada antes de simular get: " + livroFalso.getTitulo());
-		
-		//simulando a chamada de getTitulo()
+
+		// simulando a chamada de getTitulo()
 		when(livroFalso.getTitulo()).thenReturn(titulo);
-		
+
 		System.out.println("chamada após simular get: " + livroFalso.getTitulo());
-		
-		//simulando a chamada de leEGetPagsFaltam()
+
+		// simulando a chamada de leEGetPagsFaltam()
 		when(livroFalso.leEGetPagsFaltam(10)).thenReturn(100);
-		
-		
+
 		System.out.println("chamada de leEGetPagsFaltam sem um parâmetro simulado:"
-			+ livroFalso.leEGetPagsFaltam(5));
-		
+				+ livroFalso.leEGetPagsFaltam(5));
+
 		System.out.println("chamada de leEGetPagsFaltam com um parâmetro simulado:"
-			+ livroFalso.leEGetPagsFaltam(10));
-		
-		//verifica se o método getTitulo foi chamado duas vezes
+				+ livroFalso.leEGetPagsFaltam(10));
+
+		// verifica se o método getTitulo foi chamado duas vezes
 		verify(livroFalso, times(2)).getTitulo();
 	}
-
 }
