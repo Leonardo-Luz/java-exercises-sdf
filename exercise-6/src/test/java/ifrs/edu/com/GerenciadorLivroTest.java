@@ -17,24 +17,20 @@ public class GerenciadorLivroTest {
 	@BeforeEach
 	public void setup() {
 		this.livroDAOMock = mock(LivroDao.class);
-		this.livrosReservados = new ArrayList<>();
-		this.livrosLocados = new ArrayList<>();
 
+		this.livrosReservados = new ArrayList<>();
 		this.livrosReservados.add(new Livro(1, "sr dos aneis", 100, 0, Reservado.RESERVADO,
 				LocalDate.now().minusDays(8), null, "harry.Pot@magic.bol"));
-
 		this.livrosReservados.add(new Livro(2, "hobbit", 150, 0, Reservado.RESERVADO,
 				LocalDate.now().minusDays(6), null, "harry.Pot@magic.bol"));
-
 		this.livrosReservados.add(new Livro(3, "harry potter", 200, 0, Reservado.RESERVADO,
 				LocalDate.now().minusDays(10), null, "frodo0Cinzento@mail.com"));
 
+		this.livrosLocados = new ArrayList<>();
 		this.livrosLocados.add(new Livro(4, "sr dos aneis", 100, 0, Reservado.LOCADO,
 				null, LocalDate.now().minusDays(8), "harry.Pot@magic.bol"));
-
 		this.livrosLocados.add(new Livro(5, "hobbit", 150, 0, Reservado.LOCADO,
 				null, LocalDate.now().minusDays(13), "harry.Pot@magic.bol"));
-
 		this.livrosLocados.add(new Livro(6, "harry potter", 200, 0, Reservado.LOCADO,
 				null, LocalDate.now().minusDays(16), "frodo0Cinzento@mail.com"));
 
