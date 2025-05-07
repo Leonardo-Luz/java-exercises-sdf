@@ -39,7 +39,6 @@ public class PessoaDAO {
                 if (generatedKeys.next()) {
                     long key = generatedKeys.getLong(1);
                     p.setId((int) key);
-                    System.out.println("key: " + key);
                 }
             }
         } catch (Exception e) {
