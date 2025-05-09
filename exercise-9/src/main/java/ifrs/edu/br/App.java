@@ -1,0 +1,80 @@
+package ifrs.edu.br;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
+import ifrs.edu.br.dao.FuncionarioDAO;
+import io.github.cdimascio.dotenv.Dotenv;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
+/**
+ * Hello world!
+ */
+public class App {
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+
+        Dotenv dotenv = Dotenv.load();
+
+        Map<String, Object> config = new HashMap<>();
+        config.put("javax.persistence.jdbc.url", dotenv.get("POSTGRES_DATABASE_JDBC"));
+        config.put("javax.persistence.jdbc.user", dotenv.get("POSTGRES_DATABASE_USER"));
+        config.put("javax.persistence.jdbc.password", dotenv.get("POSTGRES_DATABASE_PASSWORD"));
+
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("PostgresSQLDefaultPU", config);
+        EntityManager entityMan = emf.createEntityManager();
+
+        FuncionarioDAO funcionarioDAO = new FuncionarioDAO(entityMan);
+        Client client = new Client(funcionarioDAO);
+
+        while (true) {
+            System.out.println();
+            System.out.println();
+            System.out.print("> ");
+            String res = scan.nextLine();
+
+            switch (res.toLowerCase()) {
+                case "insert":
+                    client.insert();
+                    break;
+                case "find":
+                    client.find();
+                    break;
+                case "list":
+                    client.list();
+                    break;
+                case "update":
+                    client.update();
+                    break;
+                case "delete":
+                    client.delete();
+                    break;
+                case "help":
+                    System.out.println("# commands");
+                    System.out.println("> insert");
+                    System.out.println("> find");
+                    System.out.println("> list");
+                    System.out.println("> update");
+                    System.out.println("> delete");
+                    System.out.println("> quit");
+                    System.out.println("> help");
+                    System.out.println();
+                    break;
+                case "quit":
+                    System.out.println("Exiting...");
+                    scan.close();
+                    client.close();
+                    entityMan.close();
+                    emf.close();
+                    return;
+                default:
+                    System.out.println("Invalid command");
+                    break;
+            }
+        }
+    }
+}
