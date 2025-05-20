@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
+import ifrs.edu.br.dao.DependenteDAO;
 import ifrs.edu.br.dao.FuncionarioDAO;
 import io.github.cdimascio.dotenv.Dotenv;
 
@@ -27,6 +28,8 @@ public class App {
 
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("PostgresSQLDefaultPU", config);
         EntityManager entityMan = emf.createEntityManager();
+
+        DependenteDAO dependenteDAO = new DependenteDAO(entityMan);
 
         FuncionarioDAO funcionarioDAO = new FuncionarioDAO(entityMan);
         Client client = new Client(funcionarioDAO);
