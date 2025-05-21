@@ -2,6 +2,7 @@ package ifrs.edu.br.models;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -95,11 +96,18 @@ public class Funcionario {
 
     @Override
     public String toString() {
+        String dependentesString = this.dependentes.stream()
+                .map((dependente) -> "\t\tcpf: " + dependente.getCpf() + "\n")
+                .collect(Collectors.joining(""));
+
         return "Funcionário: \n" +
                 "\tid: " + this.id + "\n" +
                 "\thorasExtras: " + this.horasExtras + "\n" +
                 "\tdataNascimento: " + this.dataNascimento.toString() + "\n" +
                 "\tnome: " + this.nome.toString() + "\n" +
-                "\temail: " + this.email.toString();
+                "\temail: " + this.email.toString() +
+                ((this.dependentes != null && this.dependentes.size() > 0)
+                        ? "\n\tdependentes: \n" + dependentesString
+                        : "");
     }
 }

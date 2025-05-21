@@ -26,11 +26,12 @@ public class Dependente {
     @JoinColumn(name = "id_funcionario")
     private Funcionario funcionario;
 
-    public Dependente(String cpf, LocalDate dataNascimento, String nome, String profissao) {
-        this.cpf = cpf;
+    public Dependente(String cpf, LocalDate dataNascimento, String nome, String profissao, Funcionario funcionario) {
+        this.setCpf(cpf);
         this.dataNascimento = dataNascimento;
         this.nome = nome;
         this.profissao = profissao;
+        this.funcionario = funcionario;
     }
 
     public Dependente() {
@@ -41,7 +42,38 @@ public class Dependente {
     }
 
     public void setCpf(String cpf) {
+        if (!cpfIsValid(cpf))
+            throw new RuntimeException("Cpf inválido");
+
         this.cpf = cpf;
+    }
+
+    private boolean cpfIsValid(String cpf) {
+        int first = 0;
+        for (int i = 8; i >= 0; i--)
+            first += Character.getNumericValue(cpf.charAt(i)) * ((8 - i) + 2);
+
+        if (first % 11 < 2)
+            first = 0;
+        else
+            first = 11 - (first % 11);
+
+        if (first != Character.getNumericValue(cpf.charAt(9)))
+            return false;
+
+        int second = 0;
+        for (int i = 9; i >= 0; i--)
+            second += Character.getNumericValue(cpf.charAt(i)) * ((9 - i) + 2);
+
+        if (second % 11 < 2)
+            second = 0;
+        else
+            second = 11 - (second % 11);
+
+        if (second != Character.getNumericValue(cpf.charAt(10)))
+            return false;
+
+        return true;
     }
 
     public LocalDate getDataNascimento() {
@@ -66,6 +98,14 @@ public class Dependente {
 
     public void setProfissao(String profissao) {
         this.profissao = profissao;
+    }
+
+    public Funcionario getFuncionario() {
+        return funcionario;
+    }
+
+    public void setFuncionario(Funcionario funcionario) {
+        this.funcionario = funcionario;
     }
 
     @Override

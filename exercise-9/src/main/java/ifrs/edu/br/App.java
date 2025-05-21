@@ -32,7 +32,7 @@ public class App {
         DependenteDAO dependenteDAO = new DependenteDAO(entityMan);
 
         FuncionarioDAO funcionarioDAO = new FuncionarioDAO(entityMan);
-        Client client = new Client(funcionarioDAO);
+        Client client = new Client(funcionarioDAO, dependenteDAO);
 
         while (true) {
             System.out.println();
@@ -43,6 +43,9 @@ public class App {
             switch (res.toLowerCase()) {
                 case "insert":
                     client.insert();
+                    break;
+                case "add":
+                    client.addDependente();
                     break;
                 case "find":
                     client.find();
@@ -59,6 +62,7 @@ public class App {
                 case "help":
                     System.out.println("# commands");
                     System.out.println("> insert");
+                    System.out.println("> add");
                     System.out.println("> find");
                     System.out.println("> list");
                     System.out.println("> update");
