@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 import ifrs.edu.br.dao.DependenteDAO;
 import ifrs.edu.br.dao.FuncionarioDAO;
+import ifrs.edu.br.dao.ProjetoDAO;
 import io.github.cdimascio.dotenv.Dotenv;
 
 import javax.persistence.EntityManager;
@@ -30,9 +31,10 @@ public class App {
         EntityManager entityMan = emf.createEntityManager();
 
         DependenteDAO dependenteDAO = new DependenteDAO(entityMan);
-
         FuncionarioDAO funcionarioDAO = new FuncionarioDAO(entityMan);
-        Client client = new Client(funcionarioDAO, dependenteDAO);
+        ProjetoDAO projetoDAO = new ProjetoDAO(entityMan);
+
+        Client client = new Client(funcionarioDAO, dependenteDAO, projetoDAO);
 
         while (true) {
             System.out.println();
@@ -44,11 +46,23 @@ public class App {
                 case "insert":
                     client.insert();
                     break;
-                case "add":
+                case "add dependente":
                     client.addDependente();
                     break;
-                case "find":
-                    client.find();
+                case "add projeto":
+                    client.addProjeto();
+                    break;
+                case "add participante in projeto":
+                    client.insertEmpregadoInProjeto();
+                    break;
+                case "complete projeto":
+                    client.insertEmpregadoInProjeto();
+                    break;
+                case "find projeto":
+                    client.findProjeto();
+                    break;
+                case "find empregado":
+                    client.findEmpregado();
                     break;
                 case "list":
                     client.list();
@@ -62,8 +76,12 @@ public class App {
                 case "help":
                     System.out.println("# commands");
                     System.out.println("> insert");
-                    System.out.println("> add");
-                    System.out.println("> find");
+                    System.out.println("> add dependente");
+                    System.out.println("> add projeto");
+                    System.out.println("> add participante in projeto");
+                    System.out.println("> complete projeto");
+                    System.out.println("> find projeto");
+                    System.out.println("> find empregado");
                     System.out.println("> list");
                     System.out.println("> update");
                     System.out.println("> delete");

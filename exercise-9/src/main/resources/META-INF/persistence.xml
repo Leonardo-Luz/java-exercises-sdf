@@ -9,6 +9,7 @@
     <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
     <class>ifrs.edu.br.models.Funcionario</class>
     <class>ifrs.edu.br.models.Dependente</class>
+    <class>ifrs.edu.br.models.Projeto</class>
 
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
@@ -21,8 +22,8 @@
       <!-- Hibernate properties -->
       <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
       <property name="hibernate.hbm2ddl.auto" value="update"/>
-      <property name="hibernate.show_sql" value="true"/>  <!-- Optional: Show SQL statements in the console -->
-      <property name="hibernate.format_sql" value="true"/> <!-- Optional: Format SQL statements -->
+      <property name="hibernate.show_sql" value="true"/>  <!-- Show SQL statements in the console -->
+      <property name="hibernate.format_sql" value="true"/> <!-- Format SQL statements -->
     </properties>
   </persistence-unit>
 

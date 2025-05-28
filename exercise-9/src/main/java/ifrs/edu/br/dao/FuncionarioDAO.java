@@ -28,4 +28,12 @@ public class FuncionarioDAO extends DAO<Funcionario> {
 
         return sql.setFirstResult(offset).setMaxResults(limit).getResultList();
     }
+
+    public List<Funcionario> listarProjetos(int limit, int offset) {
+        TypedQuery<Funcionario> sql = this.entityManager.createQuery(
+                "SELECT DISTINCT e FROM Funcionario e LEFT JOIN e.projetos p",
+                Funcionario.class);
+
+        return sql.setFirstResult(offset).setMaxResults(limit).getResultList();
+    }
 }

@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -35,6 +36,9 @@ public class Funcionario {
 
     @OneToMany(mappedBy = "funcionario")
     private List<Dependente> dependentes;
+
+    @ManyToMany(mappedBy = "participantes")
+    private List<Projeto> projetos;
 
     public Funcionario(int id, int horasExtras, LocalDate dataNascimento, String nome, String email) {
         this.id = id;

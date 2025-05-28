@@ -5,8 +5,10 @@ import java.util.List;
 import java.util.Scanner;
 
 import ifrs.edu.br.dao.FuncionarioDAO;
+import ifrs.edu.br.dao.ProjetoDAO;
 import ifrs.edu.br.dao.DependenteDAO;
 import ifrs.edu.br.models.Funcionario;
+import ifrs.edu.br.models.Projeto;
 import ifrs.edu.br.models.Dependente;
 
 /**
@@ -16,11 +18,13 @@ public class Client {
     private Scanner scanner;
     private FuncionarioDAO funcDao;
     private DependenteDAO depDao;
+    private ProjetoDAO projetoDAO;
 
-    public Client(FuncionarioDAO funcDao, DependenteDAO depDao) {
+    public Client(FuncionarioDAO funcDao, DependenteDAO depDao, ProjetoDAO projetoDAO) {
         this.scanner = new Scanner(System.in);
         this.funcDao = funcDao;
         this.depDao = depDao;
+        this.projetoDAO = projetoDAO;
     }
 
     public void insert() {
@@ -65,7 +69,54 @@ public class Client {
         System.out.println();
     }
 
-    public void find() {
+    public void addProjeto() {
+        System.out.print("nome: ");
+        String nome = scanner.nextLine();
+
+        Projeto projeto = new Projeto(nome, LocalDate.now());
+        projetoDAO.inserir(projeto);
+
+        System.out.println();
+        System.out.println("New Project created! Probably...");
+        System.out.println();
+    }
+
+    public void insertEmpregadoInProjeto() {
+        System.out.print("id do empregado: ");
+        int id = scanner.nextInt();
+        scanner.nextLine();
+
+        Funcionario funcionario = funcDao.buscar(id);
+
+        System.out.print("nome do projeto: ");
+        String nome = scanner.nextLine();
+
+        Projeto projeto = projetoDAO.buscarByNomeWithEmpregados(nome);
+
+        projeto.addParticipante(funcionario);
+
+        projetoDAO.alterar(projeto);
+
+        System.out.println();
+        System.out.println("Project successfully updated! Probably...");
+        System.out.println();
+    }
+
+    public void completeProjeto() {
+        System.out.print("nome: ");
+        String nome = scanner.nextLine();
+
+        Projeto projeto = projetoDAO.buscarByNomeWithEmpregados(nome);
+        projeto.complete();
+
+        projetoDAO.alterar(projeto);
+
+        System.out.println();
+        System.out.println("Project successfully completed! Probably...");
+        System.out.println();
+    }
+
+    public void findEmpregado() {
         System.out.print("id: ");
         int id = scanner.nextInt();
         scanner.nextLine();
@@ -74,6 +125,16 @@ public class Client {
         System.out.println();
 
         System.out.println(funcionario != null ? funcionario.toString() : "Employee not found!");
+    }
+
+    public void findProjeto() {
+        System.out.print("nome: ");
+        String nome = scanner.nextLine();
+
+        Projeto projeto = projetoDAO.buscarByNomeWithEmpregados(nome);
+        System.out.println();
+
+        System.out.println(projeto != null ? projeto.toString() : "Projeto not found!");
     }
 
     public void list() {
