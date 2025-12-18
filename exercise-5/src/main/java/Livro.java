@@ -8,13 +8,13 @@ public class Livro {
 	private boolean reservado;
 	private LocalDate dataReserva;
 
-	public Livro(int id, String titulo, int paginas, int pagsLidas, boolean reservado, LocalDate dataReserva) {
+	public Livro(int id, String titulo, int paginas, int paginasLidas, boolean reservado, LocalDate dataReserva) {
 		this.id = id;
 		this.paginas = paginas;
 		this.titulo = titulo;
 		this.reservado = reservado;
 		this.dataReserva = dataReserva;
-		this.paginasLidas = pagsLidas;
+		this.paginasLidas = paginasLidas;
 	}
 
 	public Livro(String titulo, int paginas) {

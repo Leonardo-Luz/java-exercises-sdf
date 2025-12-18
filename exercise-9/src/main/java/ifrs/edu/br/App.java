@@ -56,7 +56,7 @@ public class App {
                     client.insertEmpregadoInProjeto();
                     break;
                 case "complete projeto":
-                    client.insertEmpregadoInProjeto();
+                    client.completeProjeto();
                     break;
                 case "find projeto":
                     client.findProjeto();
